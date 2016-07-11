@@ -649,6 +649,8 @@ def setup_hadoop(
 
     try:
         api, cloudera_manager = connect(cm_api, 'admin', 'admin')
+        logging.info("Waiting for CM API to become contactable")
+        pause_until_api_up(api)    
         if cm_username == 'admin':
             logging.info("Updating admin login password")
             admin_user = api.get_user('admin')
@@ -659,17 +661,12 @@ def setup_hadoop(
             api.create_user(cm_username, cm_password, ['ROLE_ADMIN'])
 
         api, cloudera_manager = connect(cm_api, cm_username, cm_password)
-        logging.info("Waiting for CM API to become contactable")
-        pause_until_api_up(api)
         if cm_username != 'admin':
             logging.info("Deleting old admin login user")
             api.delete_user('admin')
     except:
         logging.info("Admin login user already configured")
         api, cloudera_manager = connect(cm_api, cm_username, cm_password)
-
- #   logging.info("Waiting for CM API to become contactable")
- #  pause_until_api_up(api)
 
     # There are several ways to add hosts to a cluster, this is the only one that
     # works reliably - introduce hosts & let CM handle installation of agents
