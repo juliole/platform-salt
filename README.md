@@ -1,5 +1,5 @@
 
-<iframe width="560" height="315" src="https://cisco.jiveon.com/docs/DOC-1587469" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+<iframe width="560" height="315" href="https://cisco.jiveon.com/docs/DOC-1587469" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 
 
 # Salt Master
